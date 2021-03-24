@@ -43,11 +43,10 @@ source $OSH/oh-my-bash.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # aliases 
+alias ls="exa"
 alias ll="exa -l" 
 alias vim="nvim"
-
-# tmux
-tmux set-option status-style fg=#1C1D19,bg=#A8E123
+alias f="nautilus --browser $(pwd)"
 
 # uptime
 uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}' 
