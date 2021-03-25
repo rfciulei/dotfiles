@@ -19,12 +19,6 @@ nnoremap <c-f> /
 " go to line 
 nnoremap <c-g> :
 
-" moving
-nnoremap <o> <Up>
-nnoremap <k> <Left>
-nnoremap <l> <Down>
-nnoremap <;> <Right>
-
 call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
