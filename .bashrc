@@ -1,5 +1,5 @@
 # Path to your oh-my-bash installation.
-export OSH=/home/linux/.oh-my-bash
+export OSH=/home/roar/.oh-my-bash
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -43,10 +43,11 @@ source $OSH/oh-my-bash.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # aliases 
-alias ls="exa"
-alias ll="exa -l" 
+alias ls="exa -ls type"
+alias ll="exa -als type" 
 alias vim="nvim"
 alias f="nautilus --browser $(pwd)"
 
 # uptime
 uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}' 
+#tmux
