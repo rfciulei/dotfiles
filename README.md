@@ -1,6 +1,7 @@
 # paths
-config paths:
 	~/.config/nvim/init.vim
 	~/.bashrc
-	/home/linux/.mozilla/firefox/ahk481vp.default-release/chrome/userChrome.css
-
+	
+	firefox:
+	/home/$USER/.mozilla/firefox/ahk481vp.default-release/chrome/userChrome.css
+	go to about:config and set toolkit.legacyUserProfileCustomizations.stylesheets to True
