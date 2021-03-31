@@ -8,7 +8,7 @@ Config {
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "%StdinReader%   <fc=#A8E123>%locks%</fc> }%date% { %dynnetwork% | %multicpu% | %memory% | %battery%"
+		, template = "%StdinReader% %ip%  <fc=#A8E123>%locks%</fc> }%date% {%multicpu% | %memory% | %volume% vol. | %battery%"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start
@@ -19,8 +19,11 @@ Config {
 		, persistent =       True    -- enable/disable hiding (True = disabled)
 		, commands =
 		[
-		-- capslock on/off	
-			Run Locks
+			Run Com "sh" ["-c", "~/.xmonad/get-volume.sh"] "volume" 10	
+			-- show ip
+			,Run Com "sh" ["-c", "ip route get 8.8.8.8 | awk '{print $7}'"] "ip" 3600
+			-- capslock on/off
+			,Run Locks
 			-- time and date indicator 
 			,Run Date           "<fc=#D0D0D0>%H:%M:%S (%d %b)</fc>" "date" 10
 
@@ -43,17 +46,16 @@ Config {
 			] 10
 
 			-- memory usage monitor
-			, Run Memory         [ "--template" ,"Mem: <usedratio>% (<free> MB free, <cache> MB cache, <buffer> MB buffers)"
+			, Run Memory  [ "-t" ,"Mem: <usedratio>% ( <free> MB free, <cache> MB cache )"
 			, "--Low"      , "20"        -- units: %
 			, "--High"     , "90"        -- units: %
 			, "--low"      , "#7cac7a"
 			, "--normal"   , "#7cac7a"
 			, "--high"     , "#b8473d"
 			] 10
-			,Run Brightness ["-t", ""] 60
 			-- battery monitor
 			, Run Battery        [ "--template" , " <acstatus>"
-			, "--Low"      , "10"        -- units: %
+			, "--Low"      , "15"        -- units: %
 			, "--High"     , "80"        -- units: %
 			, "--low"      , "darkred"
 			, "--normal"   , "#7cac7a"

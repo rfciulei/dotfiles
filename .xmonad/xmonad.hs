@@ -23,11 +23,11 @@ myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 
-myBorderWidth   = 1
+myBorderWidth   = 2
 myModMask       = mod4Mask
 myWorkspaces    = ["web","dev","3","social","5","6","7","8","9"]
 myNormalBorderColor  = "#222222"
-myFocusedBorderColor = "#A8E123"
+myFocusedBorderColor = "#79A216"
 mySpacing = spacingRaw True             -- Only for >1 window
                        -- The bottom edge seems to look narrower than it is
                        (Border 0 12 8 8) -- Size of screen edge gaps
