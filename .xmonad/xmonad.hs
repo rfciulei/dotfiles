@@ -25,7 +25,7 @@ myClickJustFocuses = False
 
 myBorderWidth   = 1
 myModMask       = mod4Mask
-myWorkspaces    = ["web","dev","3","4","5","6","7","8","9"]
+myWorkspaces    = ["web","dev","3","social","5","6","7","8","9"]
 myNormalBorderColor  = "#222222"
 myFocusedBorderColor = "#A8E123"
 mySpacing = spacingRaw True             -- Only for >1 window
@@ -121,7 +121,7 @@ myLogHook h = dynamicLogWithPP $ def
   { ppLayout = wrap "(<fc=#e4b63c>" "</fc>)"
   , ppTitleSanitize = const ""  -- Also about window's title
   , ppVisible = wrap "(" ")"  -- Non-focused (but still visible) screen
-  , ppCurrent = wrap "<fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>"-- Non-focused (but still visible) screen
+  , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  "-- Non-focused (but still visible) screen
   , ppOutput = hPutStrLn h
   }	
 ------------------------------------------------------------------------
