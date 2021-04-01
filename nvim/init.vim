@@ -10,7 +10,7 @@ highlight CursorLine guibg=#303000 ctermbg=236
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR><space>i
 vnoremap <c-s> :w<CR>
-nnoremap <c-q> :qa!<CR>
+nnoremap <c-q> :q<CR>
 
 " exit files and save before
 nnoremap <c-w> :wq!<CR>
