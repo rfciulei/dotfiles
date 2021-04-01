@@ -28,8 +28,8 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'itchyny/lightline.vim'
 Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
-" Plug 'zchee/deoplete-clang'
-" Plug 'scrooloose/nerdree'
+Plug 'zchee/deoplete-clang'
+Plug 'scrooloose/nerdree'
 Plug 'morhetz/gruvbox'
 
 call plug#end()
