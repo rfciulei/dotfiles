@@ -8,7 +8,7 @@ Config {
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "%StdinReader% %ip%  %dynnetwork% <fc=#A8E123>%locks%</fc> }%date% {%multicpu% | %memory% | %volume% vol. | %battery%"
+		, template = "%StdinReader% %ip%  %dynnetwork% }%date% {<fc=#A8E123>%locks%</fc>  %multicpu% | %memory% | %volume% vol. | %battery%"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start

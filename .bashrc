@@ -50,6 +50,13 @@ alias f="nautilus --browser $(pwd)"
 
 # uptime
 uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}'
-xinput set-prop 15 290 1
-xinput set-prop 15 308 1
+
+# for xmonad -> enable tapping and natural scrolling 
+DEVICE=$(xinput list | grep -P 'Touchpad' |grep -oP '(?<=id=)\d\d')
+
+ID_NATSCROLL=$(xinput list-props $DEVICE | grep -P 'Natural Scrolling Enabled \(' | grep -oP '\d{3}')
+ID_TAPPING=$(xinput list-props $DEVICE | grep -P 'Tapping Enabled \(' | grep -oP '\d{3}')
+
+$(xinput set-prop $DEVICE $ID_NATSCROLL 1)
+$(xinput set-prop $DEVICE $ID_TAPPING 1)
 
