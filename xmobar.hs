@@ -28,7 +28,8 @@ Config {
 			,Run Date           "<fc=#D0D0D0>%H:%M:%S (%d %b)</fc>" "date" 10
 
 			-- network activity monitor (dynamic interface resolution)
-			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx> kB/s  \xf0aa<tx> kB/s"
+			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx>  \xf0aa<tx>"
+			, "-S", "True"
 			, "--Low"      , "1000"       -- units: B/s
 			, "--High"     , "5000"       -- units: B/s
 			, "--low"      , "#D0D0D0"
