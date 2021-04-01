@@ -1,6 +1,6 @@
 Config { 
 	-- appearance
-		font =         "xft:Ubuntu Nerd Font:pixelsize=14:antialias=true"
+		font =         "xft:Ubuntu Nerd Font:pixelsize=15:antialias=true"
 		, bgColor =      "#1C1D19"
 		, fgColor =      "#D0D0D0"
 		, position =     Bottom
@@ -8,7 +8,7 @@ Config {
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "%StdinReader% %ip%  <fc=#A8E123>%locks%</fc> }%date% {%multicpu% | %memory% | %volume% vol. | %battery%"
+		, template = "%StdinReader% %ip%  %dynnetwork% <fc=#A8E123>%locks%</fc> }%date% {%multicpu% | %memory% | %volume% vol. | %battery%"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start
@@ -25,12 +25,13 @@ Config {
 			-- capslock on/off
 			,Run Locks
 			-- time and date indicator 
-			,Run Date           "<fc=#D0D0D0>%H:%M:%S (%d %b)</fc>" "date" 10
+			,Run Date           "<fc=#e4b63c>%H:%M</fc>:%S (%d %b)" "date" 10
 
 			-- network activity monitor (dynamic interface resolution)
-			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx> kB/s  \xf0aa<tx> kB/s"
-			, "--Low"      , "1000"       -- units: B/s
-			, "--High"     , "5000"       -- units: B/s
+			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx>  \xf0aa<tx>"
+			, "-S", "True"
+			, "--Low"      , "4000000"       -- units: B/s
+			, "--High"     , "15000000"       -- units: B/s
 			, "--low"      , "#D0D0D0"
 			, "--normal"   , "#7cac7a"
 			, "--high"     , "#A8E123"
