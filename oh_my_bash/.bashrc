@@ -1,4 +1,4 @@
-# Path to your oh-my-bash installation.
+# Path to your oh-my-bash installation.  
 export OSH=/home/roar/.oh-my-bash
 export EDITOR='nvim'
 
@@ -47,7 +47,7 @@ source $OSH/oh-my-bash.sh
 alias ls="exa -s type"
 alias ll="exa -als type" 
 alias vim="nvim"
-alias f="nautilus --browser $(pwd)"
+alias f="nautilus --browser"
 
 # uptime
 uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}'

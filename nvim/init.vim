@@ -14,6 +14,7 @@ set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set updatetime=100                      " Faster completion
 set clipboard=unnamedplus               " Copy paste between vim and everything else
+set autoread							" file updates automatically 
 colorscheme gruvbox
 
 hi cursorline cterm=none term=none
