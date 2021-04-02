@@ -1,4 +1,6 @@
 set number
+set relativenumber
+
 set cursorline
 set cmdheight=2                         " More space for displaying messages
 set iskeyword+=-                      	" treat dash separated words as a word text object"
@@ -8,7 +10,6 @@ set splitright                          " Vertical splits will automatically be 
 set t_Co=256                            " Support 256 colors
 set tabstop=4                           " Insert 2 spaces for a tab
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
-set smarttab                            " Makes tabbing smarter will realize you have 2 vs 4
 set smartindent                         " Makes indenting smart
 set autoindent                          " Good auto indent
 set updatetime=100                      " Faster completion
@@ -29,8 +30,9 @@ call plug#begin('~/.vim/plugged')
 Plug 'itchyny/lightline.vim'
 Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
 Plug 'zchee/deoplete-clang'
-Plug 'scrooloose/nerdree'
+Plug 'preservim/nerdtree'
 Plug 'morhetz/gruvbox'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 

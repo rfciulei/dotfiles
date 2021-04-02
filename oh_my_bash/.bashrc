@@ -1,5 +1,6 @@
 # Path to your oh-my-bash installation.
 export OSH=/home/roar/.oh-my-bash
+export EDITOR='nvim'
 
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-bash is loaded.
@@ -43,11 +44,20 @@ source $OSH/oh-my-bash.sh
 # export SSH_KEY_PATH="~/.ssh/rsa_id"
 
 # aliases 
-alias ls="exa -ls type"
+alias ls="exa -s type"
 alias ll="exa -als type" 
 alias vim="nvim"
 alias f="nautilus --browser $(pwd)"
 
 # uptime
-uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}' 
-#tmux
+uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}'
+
+# for xmonad -> enable tapping and natural scrolling 
+DEVICE=$(xinput list | grep -P 'Touchpad' |grep -oP '(?<=id=)\d\d')
+
+ID_NATSCROLL=$(xinput list-props $DEVICE | grep -P 'Natural Scrolling Enabled \(' | grep -oP '\d{3}')
+ID_TAPPING=$(xinput list-props $DEVICE | grep -P 'Tapping Enabled \(' | grep -oP '\d{3}')
+
+$(xinput set-prop $DEVICE $ID_NATSCROLL 1)
+$(xinput set-prop $DEVICE $ID_TAPPING 1)
+
