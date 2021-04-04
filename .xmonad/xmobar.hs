@@ -8,7 +8,7 @@ Config {
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "%StdinReader% %ip%  %dynnetwork% }%date% {<fc=#A8E123>%locks%</fc>  %multicpu% | %memory% | %volume% volume | %battery%"
+		, template = "%StdinReader% %ip%  %dynnetwork% }%date% {<fc=#A8E123>%locks%</fc>  %multicpu% | %memory% | <fc=#7cac7a> %volume% </fc> volume | %battery%"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start
@@ -25,7 +25,7 @@ Config {
 			-- capslock on/off
 			,Run Locks
 			-- time and date indicator 
-			,Run Date           "<fc=#7cac7a>%H:%M</fc> " "date" 10
+			,Run Date           "<fc=#7cac7a>%H:%M:%S - %d.%m.%y</fc> " "date" 10
 			-- network activity monitor (dynamic interface resolution)
 			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx>  \xf0aa<tx>"
 			, "-S", "True"
@@ -46,20 +46,15 @@ Config {
 			] 10
 
 			-- memory usage monitor
-			, Run Memory  [ "-t" ,"Mem: <usedratio>% ( <free> MB free, <cache> MB cache )"
-			, "--Low"      , "20"        -- units: %
-			, "--High"     , "90"        -- units: %
-			, "--low"      , "#7cac7a"
-			, "--normal"   , "#7cac7a"
-			, "--high"     , "#b8473d"
+			, Run Memory  [ "-t" ,"Mem: <fc=#7cac7a> <usedratio></fc>%( <free> MB free, <cache> MB cache )"
 			] 10
 			-- battery monitor
 			, Run Battery        [ "--template" , " <acstatus>"
 			, "--Low"      , "15"        -- units: %
 			, "--High"     , "80"        -- units: %
-			, "--low"      , "darkred"
+			, "--low"      , "#b8473d"
 			, "--normal"   , "#7cac7a"
-			, "--high"     , "#A8E123"
+			, "--high"     , "#7cac7a"
 
 			, "--" -- battery specific options
 			-- discharging status

@@ -32,7 +32,7 @@ CLOCK_THEME_PROMPT_PREFIX=''
 CLOCK_THEME_PROMPT_SUFFIX=' '
 THEME_SHOW_CLOCK=true
 THEME_CLOCK_COLOR=${THEME_CLOCK_COLOR:-"$bold_blue"}
-THEME_CLOCK_FORMAT=${THEME_CLOCK_FORMAT:-"%I:%M"}
+THEME_CLOCK_FORMAT=${THEME_CLOCK_FORMAT:-"[%I:%M]"}
 
 VIRTUALENV_THEME_PROMPT_PREFIX='('
 VIRTUALENV_THEME_PROMPT_SUFFIX=') '
@@ -42,7 +42,7 @@ function prompt_command() {
     local RC="$?"
 
 #   hostname="${bold_black}\u@\h"
-    hostname="${bold_black}\u"
+	hostname="${bold_black}\u"
 	virtualenv="${white}$(virtualenv_prompt)"
 
     # Set return status color
@@ -54,8 +54,8 @@ function prompt_command() {
 
     # Append new history lines to history file
     history -a
-
-    PS1="$(clock_prompt)${virtualenv}${hostname} ${bold_cyan}\w $(scm_prompt_char_info)${ret_status}→ ${normal}"
+	#${virtualenv}${hostname}
+    PS1="$(clock_prompt) ${bold_cyan}\w $(scm_prompt_char_info)${ret_status}→ ${normal}"
 }
 
 safe_append_prompt_command prompt_command
