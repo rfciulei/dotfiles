@@ -28,7 +28,7 @@ nnoremap <c-f> /
 nnoremap <c-g> :
 
 " NERDTree
-nnoremap <C-s-t> :NERDTreeToggle<CR>
+nnoremap <C-s-e> :NERDTreeToggle<CR>
 
 " alternative to normal mode
 inoremap <C-c> <Esc>
