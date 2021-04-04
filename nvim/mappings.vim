@@ -20,7 +20,7 @@ inoremap <F2> :set relativenumber!<CR>
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
 vnoremap <c-s> :w<CR>
-nnoremap <c-q> :qa!<CR>
+nnoremap <c-q> :q!<CR>
 
 " search for regex 
 nnoremap <c-f> /

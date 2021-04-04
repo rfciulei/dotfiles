@@ -27,26 +27,56 @@ source $HOME/.config/nvim/mappings.vim
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
+	" theme
+	Plug 'morhetz/gruvbox'
 
+	" adding some simple functionality 
 	Plug 'itchyny/lightline.vim' " more or less useless
 	Plug 'preservim/nerdcommenter' "faster comments across multiple lines -> example : 10j\cc
 	Plug 'preservim/nerdtree' " file explorer, might need it sometimes
 
-
+	" C Development 
+	" auto-completition
 	Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
 	Plug 'zchee/deoplete-clang'
-	Plug 'morhetz/gruvbox'
-	Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
+	" linting  
+	Plug 'dense-analysis/ale'
+	" formatting 
+	Plug 'sbdchd/neoformat'
 call plug#end()
 
-"let g:deoplete#enable_at_startup = 1
-"let g:deoplete#sources#clang#libclang_path = '/usr/lib/llvm-10/lib/libclang.so';
-
+" DEOPLETE - Autocompletion
+let g:deoplete#enable_at_startup = 1
+let g:deoplete#sources#clang#clang_header = "/usr/include/clang/10/include"
+let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-10/lib/libclang.so"
 call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']}) " not useful for autocomplete
 
+" DENSE-ANALYSIS - Linting 
+let g:ale_linters = {
+   \ 'cpp': ['clang'],
+    \ 'c': ['clang']
+\}
 
+" Neoformat - Formatting
+let g:neoformat_enabled_cpp = ['clangformat']
+let g:neoformat_enabled_c = ['clangformat']
+" linux kernel style format
+let g:neoformat_c_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{BasedOnStyle: LLVM, IndentWidth: 8, UseTab: Always, BreakBeforeBraces: Linux, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false }"']
+	\}
 
+" format on save 
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " gruvbox 
 colorscheme gruvbox
+
+
+
+
+
+
