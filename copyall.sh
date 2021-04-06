@@ -11,3 +11,7 @@ cp ~/.bashrc ./.oh-my-bash/
 cp ~/.config/nvim/init.vim ./nvim/
 cp ~/.config/nvim/mappings.vim ./nvim/
 cp -r ~/.config/nvim/colors/gruvbox.vim ./nvim/colors/gruvbox.vim
+#dunst
+cp ~/.config/dunst/notify ./dunst/
+cp ~/.config/dunst/dunstrc ./dunst/
+
