@@ -1,6 +1,6 @@
 #!/bin/bash 
 
-B_LEFT=$(acpi | grep -oP '\d\d(?=%)') 
+B_LEFT=$(acpi | grep -oP '\d+(?=%)') 
 
 if [ $B_LEFT -lt 15 ]
 then
