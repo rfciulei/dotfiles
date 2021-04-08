@@ -1,25 +1,25 @@
-import XMonad
-import Data.Monoid
+import System.IO
 import System.Exit
+---------------------------------
+import XMonad
+import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.SpawnOnce
-import XMonad.Hooks.ManageDocks
 import XMonad.Util.Run
 import XMonad.Hooks.DynamicLog
-import System.IO
-import XMonad.Util.EZConfig(additionalKeys)
-
+import XMonad.Hooks.ManageDocks
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders (smartBorders)
-
 -- support for dual monitors
 import XMonad.Layout.IndependentScreens
 import XMonad.Actions.UpdatePointer
-
+---------------------------------
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
-
+---------------------------------
 -- audio
 import Graphics.X11.ExtraTypes.XF86
+import Data.Monoid
+
 
 myTerminal      = "gnome-terminal"
 myFocusFollowsMouse :: Bool
@@ -28,8 +28,6 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 myBorderWidth   = 1
 myModMask       = mod4Mask
-
-
 myNormalBorderColor  = "#222222"
 myFocusedBorderColor = "#7cac7a"
 mySpacing = spacingRaw False             -- Only for >1 window
