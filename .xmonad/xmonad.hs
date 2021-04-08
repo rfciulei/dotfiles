@@ -70,8 +70,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
     -- Restart xmonad
     , ((modm , xK_q), spawn "xmonad --recompile; xmonad --restart")
-	-- Screen Lock
-   	, ((modm , xK_l), spawn "xtrlock")
+    -- Screen Lock
+    , ((modm , xK_l), spawn "xtrlock")
    ]
    -- workspaces
 	++
@@ -109,14 +109,14 @@ myManageHook = composeAll
 ------------------------------------------------------------------------
 myLogHook h = dynamicLogWithPP
  def
-  { 
-	--ppLayout = wrap "(<fc=#e4b63c>"  "</fc>)"
-	--ppHiddenNoWindows = xmobarColor "lightgray" ""    
+  {   
 	ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  " 
 	, ppOutput = hPutStrLn h
 	, ppOrder = \(ws:_:_:_) -> [ws]
 	, ppHidden = xmobarColor "#82AAFF" "" 
 	, ppSort = withWindowSet $ \ws -> return $ flip marshallSort id . W.screen . W.current $ ws
+	--,ppLayout = wrap "(<fc=#e4b63c>"  "</fc>)"
+	--,ppHiddenNoWindows = xmobarColor "lightgray" ""  
   } >> updatePointer (0.75, 0.75) (0,0)
 ------------------------------------------------------------------------
 myEventHook = mempty
@@ -132,18 +132,18 @@ main = do
 	xmobarProc <- spawnPipe "xmobar -x 0 /home/roar/.xmonad/xmobar.hs"
 	xmonad $ docks $ def {
 		terminal           = myTerminal,
-        focusFollowsMouse  = myFocusFollowsMouse,
-        clickJustFocuses   = myClickJustFocuses,
-        borderWidth        = myBorderWidth,
-        modMask            = myModMask,
-        workspaces         = withScreens 2  (map show [1..4]),
-        normalBorderColor  = myNormalBorderColor,
-        focusedBorderColor = myFocusedBorderColor,
-        keys               = myKeys,
+		focusFollowsMouse  = myFocusFollowsMouse,
+		clickJustFocuses   = myClickJustFocuses,
+		borderWidth        = myBorderWidth,
+		modMask            = myModMask,
+		workspaces         = withScreens 2  (map show [1..4]),
+		normalBorderColor  = myNormalBorderColor,
+		focusedBorderColor = myFocusedBorderColor,
+		keys               = myKeys,
 		mouseBindings      = myMouseBindings, -- hooks, layouts
-        layoutHook         = myLayout ,
-        manageHook         = myManageHook,
-        handleEventHook    = myEventHook,
-		logHook  	   	   = myLogHook xmobarProc, 
+		layoutHook         = myLayout ,
+		manageHook         = myManageHook,
+		handleEventHook    = myEventHook,
+		logHook  	   = myLogHook xmobarProc, 
 		startupHook        = myStartupHook
     }
