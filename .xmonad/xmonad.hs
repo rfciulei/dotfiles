@@ -78,7 +78,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
     ]
-    -- screens & workspaces 
+	++
+	-- lock screen 
+	[ ((modm, xK_l),
+     spawn "xtrlock")
+    -- other keybindings here
+    ]
+-- screens & workspaces 
 	++
     [((m .|. modm, k), windows $ onCurrentScreen f i)
         | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_4]
