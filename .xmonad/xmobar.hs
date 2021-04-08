@@ -8,7 +8,7 @@ Config {
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "%StdinReader% %ip%  %dynnetwork% }%date% {<fc=#A8E123>%locks%</fc>  %multicpu% | %memory% | <fc=#7cac7a> %volume% </fc> volume | %battery%"
+		, template = "%StdinReader% }%date% {<fc=#A8E123>%locks%</fc>  %multicpu% | %memory% | <fc=#7cac7a> %volume% </fc> volume | %battery%"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start
@@ -27,7 +27,7 @@ Config {
 			-- time and date indicator 
 			,Run Date           "<fc=#7cac7a>%H:%M:%S - %d.%m.%y</fc> " "date" 10
 			-- network activity monitor (dynamic interface resolution)
-			,Run DynNetwork     [ "--template" , "<dev>: \xf0ab<rx>  \xf0aa<tx>"
+			,Run DynNetwork     [ "--template" , "\xf0ab<rx>  \xf0aa<tx> <dev>"
 			, "-S", "True"
 			, "--Low"      , "4000000"       -- units: B/s
 			, "--High"     , "15000000"       -- units: B/s
