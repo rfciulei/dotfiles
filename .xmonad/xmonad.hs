@@ -23,7 +23,7 @@ import Data.Monoid
 
 myTerminal      = "gnome-terminal"
 myFocusFollowsMouse :: Bool
-myFocusFollowsMouse = False
+myFocusFollowsMouse = True
 myClickJustFocuses :: Bool
 myClickJustFocuses = False
 myBorderWidth   = 1
@@ -71,7 +71,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- Restart xmonad
     , ((modm , xK_q), spawn "xmonad --recompile; xmonad --restart")
     -- Screen Lock
-    , ((modm , xK_l), spawn "xtrlock")
+    , ((modm .|. shiftMask, xK_l), spawn "xtrlock")
    ]
    -- workspaces
 	++
