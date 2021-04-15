@@ -39,8 +39,9 @@ call plug#begin('~/.vim/plugged')
 	" auto-completition
 	Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
 	Plug 'zchee/deoplete-clang'
+"	Plug 'Shougo/neoinclude.vim'
 	" linting  
-	Plug 'dense-analysis/ale'
+ 	Plug 'dense-analysis/ale'
 	" formatting 
 	Plug 'sbdchd/neoformat'
 call plug#end()
@@ -54,29 +55,26 @@ call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']}) " not
 " DENSE-ANALYSIS - Linting 
 let g:ale_linters = {
    \ 'cpp': ['clang'],
-    \ 'c': ['clang']
+    \ 'c': ['clang -std=gnu11']
 \}
 
 " Neoformat - Formatting
 let g:neoformat_enabled_cpp = ['clangformat']
 let g:neoformat_enabled_c = ['clangformat']
+
 " linux kernel style format
 let g:neoformat_c_clangformat = {
     \ 'exe': 'clang-format',
     \ 'args': ['--style="{BasedOnStyle: LLVM, IndentWidth: 8, UseTab: Always, BreakBeforeBraces: Linux, AllowShortIfStatementsOnASingleLine: false, IndentCaseLabels: false }"']
 	\}
-
 " format on save 
 augroup fmt
   autocmd!
   autocmd BufWritePre * undojoin | Neoformat
 augroup END
+"catches an error from autoformat
+" augroup fmt autocmd!  au BufWritePre * try | undojoin | Neoformat | catch /^Vim\%((\a\+)\)\=:E790/ | finally | silent Neoformat | endtry augroup END
 
 " gruvbox 
-colorscheme gruvbox
-
-
-
-
-
-
+colorscheme gruvbox 
+autocmd BufReadPost,FileReadPost,BufNewFile * call system("tmux rename-window " . expand("%"))

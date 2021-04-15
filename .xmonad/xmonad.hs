@@ -28,8 +28,9 @@ myClickJustFocuses :: Bool
 myClickJustFocuses = False
 myBorderWidth   = 1
 myModMask       = mod4Mask
-myNormalBorderColor  = "#222222"
-myFocusedBorderColor = "#7cac7a"
+myNormalBorderColor  = "#222232"
+--myFocusedBorderColor = "#7cac7a"
+myFocusedBorderColor =  "#4B676C"
 mySpacing = spacingRaw False             -- Only for >1 window
                        -- The bottom edge seems to look narrower than it is
                        (Border 8 8 8 8) -- Size of screen edge gaps
@@ -82,7 +83,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   	-- screens
 	[
 	 ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-		  | (key, sc) <- zip [xK_F1, xK_F2] [1,0]
+		  | (key, sc) <- zip [xK_F2, xK_F1] [1,0]
 		  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
 	 ]
 
