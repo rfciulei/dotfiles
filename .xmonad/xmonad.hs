@@ -20,6 +20,8 @@ import qualified Data.Map        as M
 import Graphics.X11.ExtraTypes.XF86
 import Data.Monoid
 
+-- correct display for java swing apps
+import XMonad.Hooks.SetWMName
 
 myTerminal      = "gnome-terminal"
 myFocusFollowsMouse :: Bool
@@ -146,5 +148,6 @@ main = do
 		manageHook         = myManageHook,
 		handleEventHook    = myEventHook,
 		logHook  	   = myLogHook xmobarProc, 
+--		startupHook        = setWMName "LG3D"
 		startupHook        = myStartupHook
     }
