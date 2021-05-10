@@ -27,12 +27,12 @@ source $HOME/.config/nvim/mappings.vim
 
 " PLUGINS
 call plug#begin('~/.vim/plugged')
+	
+	"Plug 'preservim/nerdtree' " 
 
 	" theme
 	Plug 'morhetz/gruvbox'
-
-	"	Plug 'preservim/nerdtree' " file explorer, might need it sometimes
-
+	
 	" auto-completition
 	Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
 	Plug 'zchee/deoplete-clang'
@@ -49,12 +49,15 @@ call plug#end()
 let g:deoplete#enable_at_startup = 1
 let g:deoplete#sources#clang#clang_header = "/usr/include/clang/10/include"
 let g:deoplete#sources#clang#libclang_path = "/usr/lib/llvm-10/lib/libclang.so"
+
 call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']}) " not useful for autocomplete
 
 " DENSE-ANALYSIS - Linting 
-let g:ale_linters = {'c': ['clang']}
+let g:ale_linters={'c': ['clang']}
 let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
-let g:ale_c_parse_makefile = 1 
+let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
+
+let g:ale_c_parse_makefile=1 
 
 " Neoformat - Formatting
 let g:neoformat_enabled_cpp = ['clangformat']
