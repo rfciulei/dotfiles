@@ -28,15 +28,21 @@ nnoremap <c-f> /
 nnoremap <c-g> :
 
 " NERDTree
-nnoremap <C-s-e> :NERDTreeToggle<CR>
+"nnoremap <C-s-e> :NERDTreeToggle<CR>
 
 " alternative to normal mode
 inoremap <C-c> <Esc>
 vnoremap <C-c> <Esc>
+
 "added :noh to deactivate highlight after search 
 nnoremap <C-c> :noh<Esc> 
+
 " Use alt + hjkl to resize windows
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
+
+:nnoremap n nzz
+:nnoremap N Nzz
+
