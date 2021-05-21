@@ -8,7 +8,6 @@ set splitbelow                          " Horizontal splits will automatically b
 set t_Co=256                            " Support 256 colors
 set tabstop=4                           " Insert 4 spaces for a tab
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
-"set autoindent                          " Good auto indent
 set smartindent                         " Makes indenting smart
 
 set updatetime=100                      " Faster completion
@@ -21,7 +20,6 @@ hi cursorline cterm=none term=none
 autocmd WinEnter * setlocal cursorline
 autocmd WinLeave * setlocal nocursorline
 highlight CursorLine guibg=#303000 ctermbg=236
-"se tags+=/usr/include/tags
 
 " KEY MAPPINGS
 source $HOME/.config/nvim/mappings.vim
@@ -64,9 +62,11 @@ let g:ale_linters={'c': ['clang']}
 "let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
 "let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
 
-let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include'
-let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include'
+"let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include'
+"let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include'
 
+let g:ale_c_clang_options='-std=gnu11 -Wall -I/usr/include'
+let g:ale_c_cc_options='-std=gnu11 -Wall -I/usr/include'
 let g:ale_c_parse_makefile=1 
 
 " Neoformat - Formatting
