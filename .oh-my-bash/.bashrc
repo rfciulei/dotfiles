@@ -8,6 +8,4 @@ alias vim="nvim"
 alias gst="git status"
 alias f="nautilus --browser"
 
-# uptime
-uptime -p | sed 's/^up //' | awk '{print "Uptime: "$0""}'
 cd ~/dev
