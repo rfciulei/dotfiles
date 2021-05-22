@@ -45,23 +45,25 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_p     ), spawn "dmenu_run")
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
     
-	, ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+    , ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
-	
-	, ((0, xF86XK_TouchpadToggle), spawn "~/./toggle_touchpad.sh")
-   
-   -- close focused window
+    
+    , ((0, xF86XK_TouchpadToggle), spawn "/home/roar/.xmonad/scripts/toggle_touchpad.sh")
+    
+    , ((0, xF86XK_MonBrightnessUp), spawn "/home/roar/.xmonad/scripts/brightness.sh increase")
+    , ((0, xF86XK_MonBrightnessDown), spawn "/home/roar/.xmonad/scripts/brightness.sh")
+    -- close focused window
     , ((modm .|. shiftMask, xK_c), kill)
     -- Rotate through the available layout algorithms
     , ((modm, xK_space ), sendMessage NextLayout)
-	-- Move focus to the next window
+    -- Move focus to the next window
     , ((modm, xK_Tab), windows W.focusDown)
     -- Move focus to the next window
     , ((modm, xK_j), windows W.focusDown)
     -- Move focus to the previous window
     , ((modm, xK_k), windows W.focusUp)
-   -- Swap the focused window with the next window
+    -- Swap the focused window with the next window
     , ((modm .|. shiftMask, xK_j), windows W.swapDown)
     -- Swap the focused window with the previous window
     , ((modm .|. shiftMask, xK_k), windows W.swapUp)
@@ -71,7 +73,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm, xK_l), sendMessage Expand)
     -- Push window back into tiling
     , ((modm, xK_t), withFocused $ windows . W.sink)
-   -- Quit xmonad
+    -- Quit xmonad
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
     -- Restart xmonad
     , ((modm , xK_q), spawn "xmonad --recompile; xmonad --restart")
@@ -124,7 +126,7 @@ myLogHook h = dynamicLogWithPP
 	 ppHidden = xmobarColor "#c678dd" "" 
 	, ppHiddenNoWindows = xmobarColor "#7cac7a" "" 
 	, ppOrder = \(ws:_:_:_) -> [ws]
-	, ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#e1234f>]</fc>  "
+	, ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#c678dd>" "</fc><fc=#e1234f>]</fc>  "
 	, ppOutput = hPutStrLn h
   } >> updatePointer (0.75, 0.75) (0,0)
 

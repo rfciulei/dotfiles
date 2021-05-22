@@ -20,7 +20,7 @@ Config {
 		, persistent =       True    -- enable/disable hiding (True = disabled)
 		, commands =
 		[
-			Run Com "sh" ["-c", "~/.xmonad/get-volume.sh"] "volume" 10	
+			Run Com "sh" ["-c", "~/.xmonad/scripts/get-volume.sh"] "volume" 10	
 			-- show ip
 			,Run Com "sh" ["-c", "ip route get 8.8.8.8 | awk '{print $7}'"] "ip" 3600
 			-- capslock on/off
