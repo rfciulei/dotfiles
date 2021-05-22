@@ -137,7 +137,8 @@ myStartupHook = do
 	spawnOnce "nitrogen --restore & "
 	spawnOnce "compton &"
 	spawnOnce "gnome-terminal"
-	spawnOnce "firefox"
+	spawnOnce "/home/roar/.xmonad/scripts/initrc.sh"
+--	spawnOnce "firefox"
 ------------------------------------------------------------------------
 main = do
 	nScreens <- countScreens
