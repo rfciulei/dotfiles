@@ -48,6 +48,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 	, ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
     , ((0, xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -10%")
     , ((0, xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +10%")
+	
+	, ((0, xF86XK_TouchpadToggle), spawn "~/./toggle_touchpad.sh")
    
    -- close focused window
     , ((modm .|. shiftMask, xK_c), kill)
@@ -78,16 +80,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
    ]
    -- workspaces
 	++
-    [((m .|. modm, k), windows $ onCurrentScreen f i)
-        | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_4]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-	++
-  	-- screens
-	[
-	 ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-		  | (key, sc) <- zip [xK_F2, xK_F1] [1,0]
-		  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-	 ]
+	[((m .|. modm, k), windows $ f i)
+      | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_9]
+      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 ------------------------------------------------------------------------
 myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -110,17 +105,29 @@ myManageHook = composeAll
     [ resource  =? "desktop_window" --> doIgnore
     , resource  =? "kdesktop"       --> doIgnore ]
 ------------------------------------------------------------------------
+--myLogHook h = dynamicLogWithPP
+-- def
+--  {   
+--	ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  " 
+--	, ppOutput = hPutStrLn h
+--	, ppOrder = \(ws:_:_:_) -> [ws]
+--	, ppHidden = xmobarColor "#82AAFF" "" 
+--	, ppSort = withWindowSet $ \ws -> return $ flip marshallSort id . W.screen . W.current $ ws
+--	--,ppLayout = wrap "(<fc=#e4b63c>"  "</fc>)"
+--	--,ppHiddenNoWindows = xmobarColor "lightgray" ""  
+--  } >> updatePointer (0.75, 0.75) (0,0)
+
 myLogHook h = dynamicLogWithPP
  def
-  {   
-	ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  " 
-	, ppOutput = hPutStrLn h
+  { 
+  	-- ppTitleSanitize = const ""  -- Also about window's title
+	 ppHidden = xmobarColor "#c678dd" "" 
+	, ppHiddenNoWindows = xmobarColor "#7cac7a" "" 
 	, ppOrder = \(ws:_:_:_) -> [ws]
-	, ppHidden = xmobarColor "#82AAFF" "" 
-	, ppSort = withWindowSet $ \ws -> return $ flip marshallSort id . W.screen . W.current $ ws
-	--,ppLayout = wrap "(<fc=#e4b63c>"  "</fc>)"
-	--,ppHiddenNoWindows = xmobarColor "lightgray" ""  
+	, ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#e1234f>]</fc>  "
+	, ppOutput = hPutStrLn h
   } >> updatePointer (0.75, 0.75) (0,0)
+
 ------------------------------------------------------------------------
 myEventHook = mempty
 ------------------------------------------------------------------------
@@ -139,7 +146,8 @@ main = do
 		clickJustFocuses   = myClickJustFocuses,
 		borderWidth        = myBorderWidth,
 		modMask            = myModMask,
-		workspaces         = withScreens 2  (map show [1..4]),
+--		workspaces         = withScreens 2  (map show [1..4]),
+		workspaces         = ["web", "dev", "3", "4", "5", "6", "7", "8","9"],
 		normalBorderColor  = myNormalBorderColor,
 		focusedBorderColor = myFocusedBorderColor,
 		keys               = myKeys,
