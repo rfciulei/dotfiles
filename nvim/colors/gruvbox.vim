@@ -18,9 +18,9 @@ endif
 
 let g:colors_name='gruvbox'
 
-if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256
+if !(has('termguicolors') && &termguicolors) && !has('gui_running') && &t_Co != 256"{{{
   finish
-endif
+endif"}}}
 
 " }}}
 " Global Settings: {{{
@@ -483,11 +483,9 @@ if version >= 700
   call s:HL('TabLineFill', s:bg4, s:bg1, s:invert_tabline)
   " Active tab page label
   " better highlight for current tab 
-  "call s:HL('TabLineSel', s:green, s:bg1, s:invert_tabline)
   call s:HL('TabLineSel', s:bg1, s:green, s:invert_tabline)
   " Not active tab page label
-  hi! link TabLine TabLineFill
-
+  call s:HL('TabLine', s:gb.bright_green, s:bg1, s:invert_tabline)
   " Match paired bracket under the cursor
   call s:HL('MatchParen', s:none, s:bg3, s:bold)
 endif

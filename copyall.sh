@@ -1,7 +1,8 @@
 #xmonad
 cp ~/.xmonad/xmonad.hs ./.xmonad/
 cp ~/.xmonad/xmobar.hs ./.xmonad/
-cp ~/.xmonad/get-volume.sh ./.xmonad/
+cp ~/.xmonad/scripts ./.xmonad/ -r
+
 #tmux
 cp ~/.tmux.conf .
 #oh-my-bash

@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
 
-function prompt_command() {
-    # Append new history lines to history file
+function prompt() {
     history -a
-    #PS1="${bold_cyan}\u@\h \w $(scm_prompt_char_info)${ret_status}→ ${normal}"
-    PS1="${bold_cyan}\u@\h \w ${bold_green}→ ${normal}"
+	PS1="\u@\h: \w${green}$(scm_prompt_info) \$${normal} "
 }
-
-safe_append_prompt_command prompt_command
+safe_append_prompt_command prompt

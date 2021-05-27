@@ -12,9 +12,11 @@ vnoremap <C-h> 10h
 vnoremap <C-j> 10j
 vnoremap <C-k> 10k
 
-" toggle relative numbers 
+" toggles 
 nnoremap <F2> :set relativenumber!<CR>
 inoremap <F2> :set relativenumber!<CR>
+nnoremap <C-s-e> :NERDTreeToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
 " save files
 nnoremap <c-s> :w<CR>
@@ -24,27 +26,19 @@ nnoremap <c-q> :q!<CR>
 
 " search for regex 
 nnoremap <c-f> /
-
+"added :noh to deactivate highlight after search 
+nnoremap <C-c> :noh<Esc> 
+:nnoremap n nzz
+:nnoremap N Nzz
 " go to line 
 nnoremap <c-g> :
-
-" NERDTree
-nnoremap <C-s-e> :NERDTreeToggle<CR>
 
 " alternative to normal mode
 inoremap <C-c> <Esc>
 vnoremap <C-c> <Esc>
 
-"added :noh to deactivate highlight after search 
-nnoremap <C-c> :noh<Esc> 
-:nnoremap n nzz
-:nnoremap N Nzz
-
-" Use alt + hjkl to resize windows
+" resize splits -> alt + hjkl  
 nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
-
-nnoremap <F4> :!make<cr>
-nnoremap <F5> :!./a.out<cr>

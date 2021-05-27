@@ -1,16 +1,16 @@
+set mouse=a                             " enable mouse
 set number
-set relativenumber " F2 to toggle in mappings.vim
+"set relativenumber " F2 to toggle in mappings.vim
 
-set cmdheight=4                         " More space for displaying messages
-set mouse=a                             " Enable your mouse
-set splitbelow                          " Horizontal splits will automatically be below
-"set splitright                          " Vertical splits will automatically be to the right
+set cmdheight=6                         " More space for displaying messages
+set splitbelow                          
+set splitright                          
+
 set t_Co=256                            " Support 256 colors
 set tabstop=4                           " Insert 4 spaces for a tab
 set shiftwidth=4                        " Change the number of space characters inserted for indentation
-set smartindent                         " Makes indenting smart
 
-set updatetime=100                      " Faster completion
+set updatetime=70                      " Faster completion
 set clipboard=unnamedplus               " Copy paste between vim and everything else
 set autoread							" file updates automatically 
 set statusline+=%F " show full path 
@@ -27,20 +27,17 @@ source $HOME/.config/nvim/mappings.vim
 " PLUGINS
 call plug#begin('~/.vim/plugged')
 
-	" file explorer
+	" IDE-like features 
 	Plug 'preservim/nerdtree'  
+	Plug 'majutsushi/tagbar'
 
 	" theme
 	Plug 'morhetz/gruvbox'
-	
 	" auto-completition
-	" TO-DO : replace with YouCompleteMe
 	Plug 'Shougo/deoplete.nvim', {'do' : 'UpdateRemotePlugins'}
 	Plug 'zchee/deoplete-clang'
-	
 	" linting  
  	Plug 'dense-analysis/ale'
-
 	" formatting 
 	Plug 'sbdchd/neoformat'
 
@@ -59,12 +56,6 @@ call deoplete#custom#option('ignore_sources', {'_': ['around', 'buffer']}) " not
 
 " DENSE-ANALYSIS - Linting 
 let g:ale_linters={'c': ['clang']}
-"let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
-"let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include -I/usr/src/linux-hwe-5.8-headers-5.8.0-50/include'
-
-"let g:ale_c_clang_options='-std=c11 -Wall -I/usr/include'
-"let g:ale_c_cc_options='-std=c11 -Wall -I/usr/include'
-
 let g:ale_c_clang_options='-std=gnu11 -Wall -I/usr/include'
 let g:ale_c_cc_options='-std=gnu11 -Wall -I/usr/include'
 let g:ale_c_parse_makefile=1 
