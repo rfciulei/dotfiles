@@ -2,6 +2,12 @@
 
 function prompt() {
     history -a
-	PS1="\u@\h: \w${green}$(scm_prompt_info) \$${normal} "
+
+	if [ "$USER" = "root" ]; then
+		PS1="${underline_red}\u${normal}@\h: \w${green}$(scm_prompt_info) \$${normal} "
+	else	
+		PS1="\u@\h: \w${green}$(scm_prompt_info) \$${normal} "
+	fi
+
 }
 safe_append_prompt_command prompt
