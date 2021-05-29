@@ -15,18 +15,21 @@ vnoremap <C-k> 10k
 " toggles 
 nnoremap <F2> :set relativenumber!<CR>
 inoremap <F2> :set relativenumber!<CR>
-nnoremap <C-s-e> :NERDTreeToggle<CR>
-nmap <F8> :TagbarToggle<CR>
 
 " save files
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
 vnoremap <c-s> :w<CR>
 nnoremap <c-q> :q!<CR>
+" format on save 
+augroup fmt
+  autocmd!
+  autocmd BufWritePre * undojoin | Neoformat
+augroup END
 
 " search for regex 
 nnoremap <c-f> /
-"added :noh to deactivate highlight after search 
+" added :noh to deactivate highlight after search 
 nnoremap <C-c> :noh<Esc> 
 :nnoremap n nzz
 :nnoremap N Nzz
