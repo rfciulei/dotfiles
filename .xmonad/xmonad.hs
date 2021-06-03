@@ -80,7 +80,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
    -- workspaces
     ++
     [((m .|. modm, k), windows $ f i)
-      | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_4]
+      | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5]
       , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 ------------------------------------------------------------------------
@@ -105,10 +105,14 @@ myManageHook = composeAll
 myLogHook h = dynamicLogWithPP
  def
   { 
-    ppHidden = xmobarColor "#c678dd" "" 
-    , ppHiddenNoWindows = xmobarColor "#7cac7a" "" 
+    --ppHidden = xmobarColor 7999775c" "" 
+    ppHidden = xmobarColor "#7cac7a" "" 
+    , ppHiddenNoWindows = xmobarColor "#666666" "" 
+    , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  "
+   -- ppHidden = xmobarColor "#c678dd" "" 
+   -- , ppHiddenNoWindows = xmobarColor "#7cac7a" "" 
+   -- , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#c678dd>" "</fc><fc=#e1234f>]</fc>  "
     , ppOrder = \(ws:_:_:_) -> [ws]
-    , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#c678dd>" "</fc><fc=#e1234f>]</fc>  "
     , ppOutput = hPutStrLn h
   } >> updatePointer (0.75, 0.75) (0,0)
 
@@ -131,7 +135,7 @@ main = do
 		clickJustFocuses   = False,
 		borderWidth        = 1,
 		modMask            = mod4Mask,
-		workspaces         = ["web/man", "dev", "3", "4"],
+		workspaces         = ["web", "dev", "3", "4", "5"],
 		normalBorderColor  = "#222232" ,
 		focusedBorderColor = "#4B676C",
 		keys               = myKeys,
