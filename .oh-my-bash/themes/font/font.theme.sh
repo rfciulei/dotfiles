@@ -2,11 +2,17 @@
 
 function prompt() {
     history -a
+	
+	CURR_BRANCH=$(git_current_branch)
+	BRANCH=""
+	if [[ -n "$CURR_BRANCH" ]]; then
+		BRANCH="| $(git_current_branch) |"
+	fi
 
 	if [ "$USER" = "root" ]; then
-		PS1="${underline_red}\u${normal}@\h: \w${green}$(scm_prompt_info) \$${normal} "
+		PS1="${underline_red}\u${normal} \w${green} $BRANCH \$${normal} "
 	else	
-		PS1="\u@\h: \w${green}$(scm_prompt_info) \$${normal} "
+		PS1="${green}\u${normal} \w${green} $BRANCH \$${normal} "
 	fi
 
 }

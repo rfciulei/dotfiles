@@ -3,12 +3,13 @@
 B_LEFT=$(acpi | grep -oP '\d+(?=%)') 
 DISCHARGING=$(acpi | grep -oP 'Discharging')
 
-if [[ -n $DISCHARGING ]]; then
+if [ "$1" = "increase" ]; then
 	if [ $B_LEFT -lt 15 ]
 	then
-		echo $(/usr/bin/date) >> /home/roar/.config/dunst/logs
+		#echo $(/usr/bin/date) >> /home/roar/.config/dunst/logs
 		export DISPLAY=:0 
 		$(/usr/bin/notify-send "Low-Battery" -u CRITICAL) 
+
 	fi 
 fi
 

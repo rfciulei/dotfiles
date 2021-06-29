@@ -16,6 +16,9 @@ vnoremap <C-k> 10k
 nnoremap <F2> :set relativenumber!<CR>
 inoremap <F2> :set relativenumber!<CR>
 
+nnoremap <C-S-e> :NERDTreeFocus<CR>
+inoremap <C-S-e> :NERDTreeFocus<CR>
+
 " save files
 nnoremap <c-s> :w<CR>
 inoremap <c-s> <Esc>:w<CR>
@@ -45,3 +48,5 @@ nnoremap <M-j>    :resize -2<CR>
 nnoremap <M-k>    :resize +2<CR>
 nnoremap <M-h>    :vertical resize -2<CR>
 nnoremap <M-l>    :vertical resize +2<CR>
+
+nnoremap <F10> :! nasm % <CR>

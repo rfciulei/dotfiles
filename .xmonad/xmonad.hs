@@ -20,22 +20,12 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Hooks.SetWMName
 ---------------------------------
 
-myLayout = avoidStruts $ mySpacing $ smartBorders (tiled ||| Full ) 
+myLayout = avoidStruts $ spacing 3 $ smartBorders (tiled ||| Full ) 
   where
      tiled   = Tall nmaster delta ratio
      nmaster = 1
      ratio   = 1/2
      delta   = 3/100
-
-------------------------------------------------------------------------
-
-mySpacing = spacingRaw False             -- Only for >1 window
-                       -- The bottom edge seems to look narrower than it is
-                       (Border 8 8 8 8) -- Size of screen edge gaps
-                       True             -- Enable screen edge gaps
-                       (Border 4 4 4 4) -- Size of window gaps
-                       True             -- Enable window gaps
-
 ------------------------------------------------------------------------
 
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
@@ -105,13 +95,9 @@ myManageHook = composeAll
 myLogHook h = dynamicLogWithPP
  def
   { 
-    --ppHidden = xmobarColor 7999775c" "" 
-    ppHidden = xmobarColor "#7cac7a" "" 
+    ppHidden = xmobarColor "#3db87d" "" 
     , ppHiddenNoWindows = xmobarColor "#666666" "" 
-    , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#7cac7a>" "</fc><fc=#b8473d>]</fc>  "
-   -- ppHidden = xmobarColor "#c678dd" "" 
-   -- , ppHiddenNoWindows = xmobarColor "#7cac7a" "" 
-   -- , ppCurrent = wrap "  <fc=#b8473d>[</fc><fc=#c678dd>" "</fc><fc=#e1234f>]</fc>  "
+    , ppCurrent = wrap "  <fc=#3db4b8>[</fc><fc=#3db4b8>" "</fc><fc=#3db4b8>]</fc> "
     , ppOrder = \(ws:_:_:_) -> [ws]
     , ppOutput = hPutStrLn h
   } >> updatePointer (0.75, 0.75) (0,0)
@@ -135,9 +121,9 @@ main = do
 		clickJustFocuses   = False,
 		borderWidth        = 1,
 		modMask            = mod4Mask,
-		workspaces         = ["web", "dev", "3", "4", "5"],
-		normalBorderColor  = "#222232" ,
-		focusedBorderColor = "#4B676C",
+		workspaces         = ["web", "dev", "a", "b", "c"],
+		normalBorderColor  = "#0A0E14" ,
+		focusedBorderColor = "#81A1C1",
 		keys               = myKeys,
 		mouseBindings      = myMouseBindings, 
 		layoutHook         = myLayout ,
