@@ -10,6 +10,7 @@ alias vim="nvim"
 # GIT
 source /etc/bash_completion.d/git-prompt 
 
+alias gcl="git clone"
 alias gst="git status -s"
 alias gd="git diff"
 alias f="nautilus --browser"
