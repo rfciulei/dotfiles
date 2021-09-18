@@ -2,15 +2,18 @@ import System.IO
 import System.Exit
 ---------------------------------
 import XMonad
+
 import XMonad.Util.EZConfig(additionalKeys)
 import XMonad.Util.SpawnOnce
 import XMonad.Util.Run
+
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.ManageDocks
+
 import XMonad.Layout.Spacing
-import XMonad.Layout.NoBorders (smartBorders)
+import XMonad.Layout.NoBorders     
+
 import XMonad.Actions.UpdatePointer
-import XMonad.Hooks.ManageHelpers
 ---------------------------------
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -22,12 +25,17 @@ import XMonad.Hooks.SetWMName
 ---------------------------------
 -- 2nd screen
 import XMonad.Layout.IndependentScreens
-import XMonad.Util.NamedScratchpad
+import XMonad.Util.WorkspaceCompare
+
+import XMonad.Actions.GridSelect
 
 ------------------------------------------------------------------------
+
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+	, ((modm .|. shiftMask, xK_t), spawn $ XMonad.terminal conf)
+    --, ((modm,               xK_p     ), spawn "dmenu_run")
+    , ((modm,               xK_p     ), spawn "rofi -show run")
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
    
     --audio
@@ -46,21 +54,25 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
     -- close focused window
     , ((modm .|. shiftMask, xK_c), kill)
+
     -- Rotate through the available layout algorithms
     , ((modm, xK_space ), sendMessage NextLayout)
-    -- Move focus to the next window
+
+    -- Move focus 
     , ((modm, xK_Tab), windows W.focusDown)
-    -- Move focus to the next window
-    , ((modm, xK_j), windows W.focusDown)
-    -- Move focus to the previous window
-    , ((modm, xK_k), windows W.focusUp)
-    , ((modm .|. shiftMask, xK_j), windows W.swapDown)
+    , ((modm .|. shiftMask, xK_Tab), windows W.focusUp)
+  
+   	-- Swap windows
+	, ((modm .|. shiftMask, xK_j), windows W.swapDown)
     , ((modm .|. shiftMask, xK_k), windows W.swapUp)
-    -- shrink master 
-    , ((modm, xK_h), sendMessage Shrink)
+	
+	-- Shrink/Expand
+	, ((modm, xK_h), sendMessage Shrink)
     , ((modm, xK_l), sendMessage Expand)
+
     -- Push window back into tiling
     , ((modm, xK_t), withFocused $ windows . W.sink)
+
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
     -- Restart xmonad
@@ -68,22 +80,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
    ]
    
    -- workspaces for laptop screen only
- -- ++
- -- [((m .|. modm, k), windows $ f i)
- --   | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5]
- --   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+-- ++
+-- [((m .|. modm, k), windows $ f i)
+--   | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5]
+--   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
     
 	-- screens & workspaces 
-	++
-    [((m .|. modm, k), windows $ onCurrentScreen f i)
-        | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_5]
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-	++
-  	[
-	 ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-		  | (key, sc) <- zip [xK_F2, xK_F1] [1,0]
-		  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
-	 ]
+  ++
+  [((m .|. modm, k), windows $ onCurrentScreen f i)
+      | (i, k) <- zip (workspaces' conf) [xK_1 .. xK_5]
+      , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+  ++
+  [
+   ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
+  	  | (key, sc) <- zip [xK_F2, xK_F1] [1,0]
+  	  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
+   ]
+
 
 ------------------------------------------------------------------------
 
@@ -112,13 +125,14 @@ myLogHook h = dynamicLogWithPP
     , ppHiddenNoWindows = xmobarColor "#666666" "" 
     , ppCurrent = wrap "  <fc=#3db4b8>[</fc><fc=#3db4b8>" "</fc><fc=#3db4b8>]</fc> "
 
-   	-- ( [ws,t] to add title ) 
-	,ppOrder = \(ws:_:t:_) -> [ws] 
-
+	, ppOrder = \(ws:_:t:_) -> [ws] 
 	, ppOutput = hPutStrLn h
     , ppTitle = xmobarColor "#b2ed00" ""
+    , ppLayout          = id
+	, ppWsSep = "  "
 	, ppSort = withWindowSet $ \ws -> return $ flip marshallSort id . W.screen . W.current $ ws
-  } >> updatePointer (0.75, 0.75) (0,0)
+		
+  } >> updatePointer (0.60, 0.60) (0,0)
 
 ------------------------------------------------------------------------
 myStartupHook = do 
@@ -127,14 +141,23 @@ myStartupHook = do
     spawnOnce "gnome-terminal"
     spawnOnce "/home/roar/.xmonad/scripts/initrc.sh"
     spawnOnce "brave-browser"
-    
     --running Java GUI programs in non-reparenting window managers 
     setWMName "LG3D"
-------------------------------------------------------------------------
-main = do
 
-	xmobarProc <- spawnPipe "xmobar -x 0 /home/roar/.xmonad/xmobar.hs"
+------------------------------------------------------------------------
+
+mySpacing = spacingRaw False             -- Only for >1 window
+                       -- The bottom edge seems to look narrower than it is
+                       (Border 4 4 4 4) -- Size of screen edge gaps
+                       True             -- Enable screen edge gaps
+                       (Border 4 4 4 4) -- Size of window gaps
+                       True             -- Enable window gaps
+
+------------------------------------------------------------------------
+--
+main = do 
 	nScreens <- countScreens
+	xmobarProc <- spawnPipe "xmobar -x 1 /home/roar/.xmonad/xmobar.hs"
 
 	xmonad $ docks $ def {
 		terminal           = "gnome-terminal",
@@ -143,14 +166,20 @@ main = do
 		borderWidth        = 1,
 		modMask            = mod4Mask,
 
-		-- workspaces         = ["web", "dev", "3", "4","5"],	
-		workspaces = withScreens nScreens (["1", "2", "3"]),
+	-- 	workspaces         = ["web", "dev", "a", "b","c"],	
+		workspaces = withScreens nScreens (["1", "2", "3", "4"]),
 
 	  	normalBorderColor  = "#0A0E14" ,
-	  	focusedBorderColor = "#3db4b8",
+			-- don't really need different color since
+			-- the mouse follows focus anyways
+			-- still, here is old color : #666666 
+	  	focusedBorderColor = "#0A0E14",
+
 	  	keys               = myKeys,
 	  	mouseBindings      = myMouseBindings, 
-		layoutHook         = avoidStruts $ spacing 1 $ smartBorders (Tall 1 (3/100) (1/2)  ||| Full ),
+
+		layoutHook         = avoidStruts $ mySpacing $ smartBorders (Tall 1 (3/100) (1/2)  ||| Full),
+
 		manageHook         = myManageHook,
 		handleEventHook    = mempty,
 		logHook  	       = myLogHook xmobarProc, 
