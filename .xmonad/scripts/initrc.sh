@@ -6,4 +6,6 @@ ID_TAPPING=$(xinput list-props $DEVICE | grep -P 'Tapping Enabled \(' | grep -oP
 $(xinput set-prop $DEVICE $ID_NATSCROLL 1)
 $(xinput set-prop $DEVICE $ID_TAPPING 1)
 $(xrandr --output "HDMI-A-0" --auto --output eDP --auto --below HDMI-A-0)
+#$(xrandr --output "HDMI-A-0" --auto --output eDP --auto --left-of HDMI-A-0)
+#$(xrandr --output "HDMI-A-0" --auto --output eDP --auto --right-of HDMI-A-0)
 
