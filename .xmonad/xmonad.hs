@@ -34,7 +34,6 @@ import XMonad.Actions.GridSelect
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 	, ((modm .|. shiftMask, xK_t), spawn $ XMonad.terminal conf)
-    --, ((modm,               xK_p     ), spawn "dmenu_run")
     , ((modm,               xK_p     ), spawn "rofi -show run")
     , ((modm .|. shiftMask, xK_p     ), spawn "gmrun")
    
@@ -79,12 +78,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm , xK_q), spawn "xmonad --recompile; xmonad --restart")
    ]
    
-   -- workspaces for laptop screen only
--- ++
--- [((m .|. modm, k), windows $ f i)
---   | (i, k) <- zip (XMonad.workspaces conf) [xK_1 .. xK_5]
---   , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
-    
 	-- screens & workspaces 
   ++
   [((m .|. modm, k), windows $ onCurrentScreen f i)
@@ -93,10 +86,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   ++
   [
    ((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-  	  | (key, sc) <- zip [xK_F2, xK_F1] [1,0]
+  	  | (key, sc) <- zip [xK_F1, xK_F2] [1,0]
   	  , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]
    ]
-
 
 ------------------------------------------------------------------------
 
@@ -137,10 +129,11 @@ myLogHook h = dynamicLogWithPP
 ------------------------------------------------------------------------
 myStartupHook = do 
     spawnOnce "nitrogen --restore & "
+    spawnOnce "redshift &" -- night light
     spawnOnce "compton &"
     spawnOnce "gnome-terminal"
     spawnOnce "/home/roar/.xmonad/scripts/initrc.sh"
-    spawnOnce "brave-browser"
+    spawnOnce "firefox https://docs.python.org/3.10/reference/introduction.html http://zesty.ca/cv.html https://cs107e.github.io/guides/binutils/"
     --running Java GUI programs in non-reparenting window managers 
     setWMName "LG3D"
 
@@ -148,10 +141,10 @@ myStartupHook = do
 
 mySpacing = spacingRaw False             -- Only for >1 window
                        -- The bottom edge seems to look narrower than it is
-                       (Border 4 4 4 4) -- Size of screen edge gaps
-                       True             -- Enable screen edge gaps
-                       (Border 4 4 4 4) -- Size of window gaps
-                       True             -- Enable window gaps
+                       (Border 2 2 2 2) -- Size of screen edge gaps
+                       False             -- Enable screen edge gaps
+                       (Border 2 2 2 2) -- Size of window gaps
+                       False             -- Enable window gaps
 
 ------------------------------------------------------------------------
 --
@@ -166,19 +159,15 @@ main = do
 		borderWidth        = 1,
 		modMask            = mod4Mask,
 
-	-- 	workspaces         = ["web", "dev", "a", "b","c"],	
 		workspaces = withScreens nScreens (["1", "2", "3", "4"]),
 
 	  	normalBorderColor  = "#0A0E14" ,
-			-- don't really need different color since
-			-- the mouse follows focus anyways
-			-- still, here is old color : #666666 
-	  	focusedBorderColor = "#0A0E14",
+	  	focusedBorderColor = "#3db4b8", -- #666666 
 
 	  	keys               = myKeys,
 	  	mouseBindings      = myMouseBindings, 
 
-		layoutHook         = avoidStruts $ mySpacing $ smartBorders (Tall 1 (3/100) (1/2)  ||| Full),
+		layoutHook         = avoidStruts $ smartBorders (Tall 1 (3/100) (1/2)  ||| Full),
 
 		manageHook         = myManageHook,
 		handleEventHook    = mempty,

@@ -4,12 +4,12 @@ Config {
 		, bgColor  =      "#1C1D19"
 		, alpha    =      1
 		, fgColor  =      "#D0D0D0"
-		, position =      Top 
+		, position =      Bottom 
 
 		-- layout
 		, sepChar =  "%"   -- delineator between plugin names and straight text
 		, alignSep = "}{"  -- separator between left-right alignment
-		, template = "<fc=#474747> | </fc> %multicpu% <fc=#474747>|</fc> %memory% <fc=#474747>|</fc>%disku%<fc=#666666> %volume%</fc><fc=#474747> | </fc><fc=#3db87d>%ip%</fc><fc=#474747> | </fc>} %StdinReader% { <fc=#e1234f>%locks%</fc>  <fc=#474747> | </fc>%battery%<fc=#666666>| </fc> %date% <fc=#3db4b8>%dayname%</fc> <fc=#666666> | </fc>"
+		, template = "<fc=#474747> | </fc> %multicpu% <fc=#474747>|</fc> %memory% <fc=#474747>|</fc>%disku%<fc=#666666> %volume%</fc><fc=#474747> | </fc><fc=#FDB924>%ip%</fc><fc=#474747> | </fc>} %StdinReader% { <fc=#e1234f>%locks%</fc>  <fc=#474747> | </fc>%battery%<fc=#666666>| </fc> %date% <fc=#3db4b8>%dayname%</fc> <fc=#666666> | </fc>"
 
 		-- general behavior
 		, lowerOnStart =     True    -- send to bottom of window stack on start

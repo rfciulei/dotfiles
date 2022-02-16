@@ -10,9 +10,13 @@ function prompt() {
 	fi
 
 	if [ "$USER" = "root" ]; then
-		PS1="${underline_red}\u${normal} \w${green} $BRANCH \$${normal} "
+		#PS1="${underline_red}\u${normal} \w${green} $BRANCH \$${normal} "
+		#PS1="${underline_red}\u${normal}@${red}\h${normal} \$PWD${red} $BRANCH \$${normal} "
+		PS1="${underline_red}\u${normal}@${red}\h${normal} \w${red} $BRANCH \$${normal} "
 	else	
-		PS1="${green}\u${normal} \w${green} $BRANCH \$${normal} "
+		#PS1="${green}\u${normal} \w${green} $BRANCH \$${normal} "
+		#PS1="${green}\u${normal}@\h \$PWD${green} $BRANCH \$${normal} "
+		PS1="${green}\u${normal}@\h \w${green} $BRANCH \$${normal} "
 	fi
 
 }
