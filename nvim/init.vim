@@ -14,25 +14,18 @@ source $HOME/.config/nvim/mappings.vim
 
 call plug#begin('~/.vim/plugged')
 
-	Plug 'arcticicestudio/nord-vim'
-
-	" formatting 
-	Plug 'sbdchd/neoformat'
-
+	Plug 'morhetz/gruvbox'
 	" search files
 	Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 	Plug 'junegunn/fzf.vim'
-
+	" outline
 	Plug 'majutsushi/tagbar'
+	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
-	Plug 'preservim/nerdtree'
+"	Plug 'preservim/nerdtree'
+"	Plug 'sbdchd/neoformat'
 
 call plug#end()
 
 autocmd ColorScheme * highlight Normal ctermbg=NONE guibg=NONE
-let g:nord_cursor_line_number_background = 1
-let g:nord_bold_vertical_split_line = 1
-let g:nord_underline = 1
-colorscheme nord 
-
-cs add $CSCOPE_DB
+colorscheme gruvbox 
